@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Tambahan agar background tidak putih polos */
+body {
+  @apply bg-slate-900 text-white;
+  margin: 0;
+}
