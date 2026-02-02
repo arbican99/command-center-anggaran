@@ -54,7 +54,7 @@ const Login = () => {
         <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-600/20 blur-[50px] rounded-full"></div>
         
         <div className="text-center mb-6 relative">
-          <img src={logo} alt="Logo" className="w-50 h-15 mx-auto mb-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+          <img src={logo} alt="Logo" className="w-40 h-12 mx-auto mb-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
           <h2 className="text-lg font-bold text-white tracking-widest uppercase">Bidang Anggaran BKAD</h2>
           <p className="text-[9px] font-bold text-yellow-400 font-bold tracking-widest">Command Center Penugasan</p>
         </div>
