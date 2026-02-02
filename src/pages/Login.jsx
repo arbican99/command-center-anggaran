@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import logo from '../assets/logo.png';
+import logo from '../assets/logokj2.png';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -54,9 +54,9 @@ const Login = () => {
         <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-600/20 blur-[50px] rounded-full"></div>
         
         <div className="text-center mb-6 relative">
-          <img src={logo} alt="Logo" className="w-14 h-14 mx-auto mb-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-          <h2 className="text-lg font-bold text-white tracking-widest uppercase">Karajo</h2>
-          <p className="text-slate-500 text-[10px] uppercase tracking-tighter">Digital Agenda System</p>
+          <img src={logo} alt="Logo" className="w-50 h-15 mx-auto mb-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+          <h2 className="text-lg font-bold text-white tracking-widest uppercase">Bidang Anggaran BKAD</h2>
+          <p className="text-[9px] font-bold text-yellow-400 font-bold tracking-widest">Command Center Penugasan</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4 relative">
@@ -67,11 +67,11 @@ const Login = () => {
           )}
 
           <div className="space-y-1">
-            <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Identity</label>
+            <label className="text-[9px] font-bold text-slate-300 uppercase tracking-widest ml-1">Nama / Email</label>
             <input
               type="text"
               required
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500/50 outline-none transition-all text-xs text-white placeholder:text-slate-600"
+              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500/50 outline-none transition-all text-xs text-white placeholder:text-slate-300"
               placeholder="Nama Lengkap / Email"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
@@ -79,7 +79,7 @@ const Login = () => {
           </div>
 
           <div className="space-y-1">
-            <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Access Key</label>
+            <label className="text-[9px] font-bold text-slate-300 uppercase tracking-widest ml-1">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -104,13 +104,13 @@ const Login = () => {
             disabled={loading}
             className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-900/20 active:scale-95 disabled:opacity-50 text-[11px] uppercase tracking-widest mt-2"
           >
-            {loading ? "Verifying..." : "Initialize Login"}
+            {loading ? "Verifying..." : "L O G I N"}
           </button>
         </form>
 
         <div className="mt-8 text-center border-t border-white/5 pt-4">
           <p className="text-[8px] text-slate-600 font-medium tracking-[0.3em] uppercase">
-            Encrypted Session
+            Login Session
           </p>
         </div>
       </div>
