@@ -1,28 +1,45 @@
 @import "tailwindcss";
 
-/* Pastikan browser mengizinkan scroll di level paling atas */
+/* 1. Reset Dasar */
 html, body {
   background-color: #020617;
   color: white;
   margin: 0;
   padding: 0;
-  height: auto !important; /* Jangan kunci tinggi */
+  /* Gunakan min-height, jangan height 100% agar konten bisa memanjang */
   min-height: 100vh;
-  overflow-x: hidden !important;
-  overflow-y: auto !important; /* Paksa scroll muncul */
-  -webkit-overflow-scrolling: touch; /* Haluskan scroll di iPhone */
+  /* Biarkan overflow-y default (visible/auto) agar scroll alami browser bekerja */
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
+/* 2. Root Container */
 #root {
   min-height: 100vh;
-  display: block; /* Hindari flex di root jika bikin masalah */
+  /* Pastikan root mengikuti tinggi konten di dalamnya */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Hilangkan scrollbar default agar tidak double */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+/* 3. Perbaikan untuk Mobile (iOS/Chrome Android) */
+@supports (-webkit-touch-callout: none) {
+  /* Khusus iOS untuk menangani dynamic toolbar yang sering menutupi bagian bawah */
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
+
+/* 4. Custom Scrollbar (Opsional) */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
 }

@@ -127,8 +127,9 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="w-full min-h-screen bg-[#020617] text-white font-sans text-left pb-24">
-      <div className="p-4 space-y-6 max-w-7xl mx-auto">
+    /* PERBAIKAN: Gunakan flex-1 dan pastikan overflow tidak di-hidden */
+    <div className="flex-1 w-full text-white font-sans text-left">
+      <div className="p-2 md:p-4 space-y-6 max-w-7xl mx-auto">
         
         {/* HEADER */}
         <div className="bg-white/5 p-4 rounded-xl border border-white/10 flex justify-between items-center shadow-lg">
@@ -200,6 +201,7 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* SECTION GRID TUGAS & MATRIX */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* PANEL GRAFIK KINERJA */}
           {privilegedRoles.includes(userProfile?.role) && (
@@ -274,6 +276,9 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+        
+        {/* Tambahan Spacer di bawah agar scroll tidak mentok */}
+        <div className="h-20 md:h-10"></div>
       </div>
     </div>
   );
