@@ -49,9 +49,9 @@ export default function Sidebar({ userRole, onLogout, isExpanded, setIsExpanded 
   ];
 
   return (
-    <aside className={`${isExpanded ? 'w-56' : 'w-20'} bg-[#0c1225] border-r border-white/5 flex flex-col p-3 transition-all duration-500 h-screen relative shadow-2xl`}>
+    <aside className={`${isExpanded ? 'w-56' : 'w-20'} bg-[#0c1225] border-r border-white/5 flex flex-col p-3 transition-all duration-500 h-full relative shadow-2xl`}>
       
-      {/* Toggle Sidebar */}
+      {/* Toggle Sidebar Button */}
       <button 
         onClick={() => setIsExpanded(!isExpanded)}
         className="absolute -right-3 top-8 bg-blue-600 rounded-lg p-1 border-2 border-[#020617] text-white z-[60] hover:scale-110 transition-all shadow-lg"
@@ -59,7 +59,7 @@ export default function Sidebar({ userRole, onLogout, isExpanded, setIsExpanded 
         {isExpanded ? <ChevronLeft size={12}/> : <ChevronRight size={12}/>}
       </button>
 
-      {/* Header Logo - Ukuran Diperbesar (max-h-24) dengan margin minimal */}
+      {/* Header Logo */}
       <div className={`mb-1 mt-0 flex items-center transition-all duration-300 ${isExpanded ? 'px-0' : 'justify-center'}`}>
         <div className={`${isExpanded ? 'w-full px-1' : 'w-14'} transition-all duration-500`}>
           <img 
@@ -70,7 +70,7 @@ export default function Sidebar({ userRole, onLogout, isExpanded, setIsExpanded 
         </div>
       </div>
 
-      {/* Profile Section - Sangat rapat dengan logo di atasnya */}
+      {/* Profile Section */}
       <div className={`mb-3 flex items-center transition-all duration-500 ${isExpanded ? 'bg-white/5 p-2 rounded-xl border border-white/5' : 'justify-center'}`}>
         <div className="relative flex-shrink-0">
           <div className="w-8 h-8 rounded-lg bg-slate-900 border border-blue-500/20 overflow-hidden">
