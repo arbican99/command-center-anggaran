@@ -1,0 +1,20 @@
+{
+  "short_name": "TaskApp",
+  "name": "Control Panel Task Approval",
+  "icons": [
+    {
+      "src": "lgapp192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "lgapp.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#020617",
+  "background_color": "#020617"
+}
