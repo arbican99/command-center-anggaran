@@ -1,41 +1,28 @@
 @import "tailwindcss";
 
+/* Pastikan browser mengizinkan scroll di level paling atas */
 html, body {
   background-color: #020617;
   color: white;
   margin: 0;
   padding: 0;
-  
-  /* Paksa overflow bisa di-scroll */
-  overflow-y: auto !important;
+  height: auto !important; /* Jangan kunci tinggi */
+  min-height: 100vh;
   overflow-x: hidden !important;
-  
-  /* Penting: Jangan gunakan height: 100% karena akan mengunci layar */
-  height: auto !important;
-  min-height: 100vh !important;
-
-  /* Izinkan semua jenis interaksi sentuh */
-  touch-action: auto !important; 
-  -webkit-overflow-scrolling: touch !important;
+  overflow-y: auto !important; /* Paksa scroll muncul */
+  -webkit-overflow-scrolling: touch; /* Haluskan scroll di iPhone */
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
-  width: 100%;
-  /* Pastikan root tidak memotong konten yang meluap */
-  overflow: visible !important; 
+  display: block; /* Hindari flex di root jika bikin masalah */
 }
 
-/* Scrollbar kustom */
-::-webkit-scrollbar {
-  width: 5px;
+/* Hilangkan scrollbar default agar tidak double */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
 }
-::-webkit-scrollbar-track {
-  background: #020617;
-}
-::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 10px;
 }
