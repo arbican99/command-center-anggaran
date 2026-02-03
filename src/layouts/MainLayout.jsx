@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import sidebar from "../components/sidebar";
+// Import file huruf kecil, tapi beri nama variabel Sidebar (huruf besar)
+import Sidebar from "../components/sidebar"; 
 
 export default function MainLayout({ children, userRole, onLogout }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -9,7 +10,8 @@ export default function MainLayout({ children, userRole, onLogout }) {
       
       {/* SIDEBAR: Muncul di desktop, sticky saat scroll */}
       <aside className="hidden md:flex sticky top-0 h-screen flex-shrink-0 border-r border-white/5 z-20">
-        <sidebar 
+        {/* Panggil dengan huruf besar agar React mengenalinya sebagai Komponen */}
+        <Sidebar 
           userRole={userRole} 
           onLogout={onLogout} 
           isExpanded={isExpanded} 
@@ -26,7 +28,7 @@ export default function MainLayout({ children, userRole, onLogout }) {
         </main>
         
         <footer className="p-8 border-t border-white/5 text-[9px] text-slate-600 uppercase tracking-widest text-center">
-          © 2026 Task Management System
+          © 2026 Command Center Bidang Anggaran
         </footer>
       </div>
 
