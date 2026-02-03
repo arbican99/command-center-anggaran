@@ -1,7 +1,37 @@
 @import "tailwindcss";
 
-/* Tambahan agar background tidak putih polos */
-body {
-  @apply bg-slate-900 text-white;
-  margin: 0;
+/* Pastikan layer dasar browser mengizinkan scroll */
+@layer base {
+  html, body {
+    @apply bg-[#020617] text-white;
+    margin: 0;
+    padding: 0;
+    /* Mengizinkan scroll vertikal dan mencegah goyang horizontal */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100% !important;
+    /* Optimasi scroll untuk iOS Safari */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: visible !important;
+  }
+}
+
+/* Scrollbar kustom agar tetap terlihat futuristik tapi fungsional */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
 }
