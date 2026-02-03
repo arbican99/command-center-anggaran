@@ -3,12 +3,12 @@
   "name": "Command Center Bidang Anggaran",
   "icons": [
     {
-      "src": "lgapp192.png",
+      "src": "lgapp1921.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "lgapp.png",
+      "src": "lgapp1.png",
       "type": "image/png",
       "sizes": "512x512"
     }
