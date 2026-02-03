@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import sidebar from "../components/sidebar";
 
 export default function MainLayout({ children, userRole, onLogout }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -9,7 +9,7 @@ export default function MainLayout({ children, userRole, onLogout }) {
       
       {/* SIDEBAR: Muncul di desktop, sticky saat scroll */}
       <aside className="hidden md:flex sticky top-0 h-screen flex-shrink-0 border-r border-white/5 z-20">
-        <Sidebar 
+        <sidebar 
           userRole={userRole} 
           onLogout={onLogout} 
           isExpanded={isExpanded} 
