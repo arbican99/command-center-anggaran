@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 {
-  "short_name": "TaskApp",
-  "name": "Control Panel Task Approval",
+  "short_name": "Team Anggaran",
+  "name": "Command Center Bidang Anggaran",
   "icons": [
     {
       "src": "lgapp192.png",
@@ -18,25 +17,4 @@
   "display": "standalone",
   "theme_color": "#020617",
   "background_color": "#020617"
-=======
-{
-  "short_name": "TaskApp",
-  "name": "Control Panel Task Approval",
-  "icons": [
-    {
-      "src": "lgapp192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "lgapp.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#020617",
-  "background_color": "#020617"
->>>>>>> 3263d78 (Update index.html dan tambah fitur PWA untuk HP)
 }
