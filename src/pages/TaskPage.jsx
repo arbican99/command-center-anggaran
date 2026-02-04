@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+// Import EmailJS
+import emailjs from '@emailjs/browser';
 import { 
   Plus, Calendar, Edit3, X, Trash2, 
   Send, Loader2, Upload, ChevronDown, ChevronRight, 
@@ -31,7 +33,6 @@ export default function TaskPage({ isExpanded }) {
       const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single();
       setCurrentUser(profile);
 
-      // Mengambil tugas berdasarkan created_by sesuai skema gambar Anda
       const { data: t, error: tErr } = await supabase
         .from('tasks')
         .select(`*, task_assignments (*, profiles (*))`)
@@ -54,6 +55,38 @@ export default function TaskPage({ isExpanded }) {
       console.error("Fetch Error:", err); 
     } finally { 
       setLoading(false); 
+    }
+  };
+
+  // Fungsi Baru: Kirim Notifikasi Email
+  const sendEmailNotifications = async (taskTitle, taskNarasi, taskDueDate) => {
+    // Filter user yang dipilih untuk mendapatkan email mereka
+    const selectedUsersData = users.filter(u => selectedAgents.includes(u.id));
+
+    // Kirim email ke setiap personil yang dipilih
+    const emailPromises = selectedUsersData.map(user => {
+      const templateParams = {
+        penerima: user.full_name,
+        target_email: user.email, // Pastikan kolom email ada di tabel profiles
+        nama_tugas: taskTitle,
+        deskripsi: taskNarasi,
+        deadline: taskDueDate,
+        pengirim: currentUser?.full_name || "Admin"
+      };
+
+      return emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+    });
+
+    try {
+      await Promise.all(emailPromises);
+      console.log("Semua notifikasi email terkirim!");
+    } catch (error) {
+      console.error("Gagal mengirim beberapa email:", error);
     }
   };
 
@@ -102,6 +135,9 @@ export default function TaskPage({ isExpanded }) {
     
     setSubmitting(true);
     const formData = new FormData(e.target);
+    const taskTitle = formData.get('title');
+    const taskNarasi = formData.get('narasi');
+    const taskDueDate = formData.get('dueDate');
     const taskNomor = editingTask?.nomor || `MSN-${Date.now()}`;
     
     try {
@@ -130,14 +166,13 @@ export default function TaskPage({ isExpanded }) {
         }
       }
 
-      // Payload disesuaikan dengan kolom di gambar skema Anda
       const payload = {
-        title: formData.get('title'),
-        narasi: formData.get('narasi'),
-        due_date: formData.get('dueDate'),
+        title: taskTitle,
+        narasi: taskNarasi,
+        due_date: taskDueDate,
         link_drive: finalDriveUrl,
         file_id_drive: finalFileId,
-        created_by: currentUser.id, // Menggunakan created_by sesuai gambar
+        created_by: currentUser.id,
         status: editingTask?.status || "Assigned"
       };
 
@@ -148,15 +183,13 @@ export default function TaskPage({ isExpanded }) {
         if (upErr) throw upErr;
         await supabase.from('task_assignments').delete().eq('task_id', editingTask.id);
       } else {
-        // Insert tugas baru
         const { data: newData, error: insErr } = await supabase
           .from('tasks')
           .insert([{ ...payload, nomor: taskNomor }])
-          .select(); // Mengambil data yang baru saja di-insert
+          .select();
         
         if (insErr) throw insErr;
         
-        // Pengecekan aman agar tidak error "reading 0"
         if (newData && newData.length > 0) {
           currentTaskId = newData[0].id;
         } else {
@@ -173,9 +206,12 @@ export default function TaskPage({ isExpanded }) {
       const { error: asgErr } = await supabase.from('task_assignments').insert(assignments);
       if (asgErr) throw asgErr;
 
+      // PROSES KIRIM EMAIL SETELAH BERHASIL SIMPAN KE DATABASE
+      await sendEmailNotifications(taskTitle, taskNarasi, taskDueDate);
+
       setIsModalOpen(false);
       fetchData();
-      alert("Data berhasil disimpan!");
+      alert("Data berhasil disimpan & Notifikasi email terkirim!");
     } catch (err) { 
       console.error("Submit Error:", err);
       alert("Terjadi kesalahan: " + err.message); 
@@ -264,7 +300,6 @@ export default function TaskPage({ isExpanded }) {
         </div>
       )}
 
-      {/* Modal */}
       {isModalOpen && (
         <div className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-all duration-500 ${isExpanded ? 'ml-64' : 'ml-24'}`}>
           <div className="bg-[#0b1224] border border-white/10 w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
